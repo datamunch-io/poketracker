@@ -45,7 +45,9 @@ class PokemonAPIScraper:
             'card_id': card.id,
             'card_name': card.name,
             'card_set': card.set.name,
-            'rarity': card.rarity
+            'rarity': card.rarity,
+            'card_print_number': card.number,
+            'set_printed_total': card.set.printedTotal
         }
         if card.tcgplayer and card.tcgplayer.prices:
             card_info.update(
