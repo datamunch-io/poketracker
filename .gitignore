@@ -240,4 +240,5 @@ cython_debug/
 .idea/
 
 data/*
+src/__pycache__/
 
