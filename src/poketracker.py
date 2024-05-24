@@ -1,6 +1,6 @@
 from google.cloud import bigquery 
 
-from src.constants import constants 
+from src import constants 
 
 
 class Poketracker:
@@ -17,7 +17,7 @@ class Poketracker:
         
         job = self.client.query(query=query)
         results = job.result()
-        return [{row.searchable: row.card_id} for row in results]
+        return {row.card_id: row.searchable for row in results}
         
     @staticmethod 
     def initialize_bq_client():
