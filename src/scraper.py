@@ -6,7 +6,7 @@ from pokemontcgsdk import RestClient
 from pokemontcgsdk import Card
 from pokemontcgsdk import Set
 
-from src.constants import PTCG_SECRET
+from src.constants import PTCG_SECRET, PROJECT_ROOT
 
 
 class PokemonAPIScraper:
@@ -32,7 +32,7 @@ class PokemonAPIScraper:
             card_info.update({'updated_at': datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")})
             card_export_list.append(card_info)
 
-        with open(f'data/card_export_{str(datetime.date.today())}.csv', 'w', encoding='utf-8') as csv_file:
+        with open(os.path.join(PROJECT_ROOT, f'data/card_export_{str(datetime.date.today())}.csv'), 'w', encoding='utf-8', newline='') as csv_file:
             writer = csv.DictWriter(csv_file, fieldnames=card_export_list[0].keys())
             writer.writeheader()
             writer.writerows(card_export_list)
@@ -45,6 +45,7 @@ class PokemonAPIScraper:
             'card_id': card.id,
             'card_name': card.name,
             'card_set': card.set.name,
+            'card_set_code': card.set.ptcgoCode,
             'rarity': card.rarity,
             'card_print_number': card.number,
             'set_printed_total': card.set.printedTotal
